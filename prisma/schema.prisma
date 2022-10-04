@@ -18,3 +18,17 @@ model User {
 
   @@map("users")
 }
+
+model Cat {
+  id    Int     @id @default(autoincrement())
+  name  String
+  imageUrl String
+  age   String?
+  genre String?
+  fivOrFelf String?
+  isVacinated Boolean?
+  isCastraded Boolean?
+  description String?
+
+  @@map("cats")
+}
