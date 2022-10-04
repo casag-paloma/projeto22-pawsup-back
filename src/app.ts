@@ -6,8 +6,8 @@ import route from "./routes/route";
 const app = express();
 app.use(json());
 
-app.use(errorHandlerMiddleware);
 app.use(route);
+app.use(errorHandlerMiddleware);
 
 
 export default app;
