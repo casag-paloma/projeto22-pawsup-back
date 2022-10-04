@@ -1,4 +1,4 @@
-type AppErrorTypes = "conflict" | "not_found" | "wrong_schema"
+type AppErrorTypes = "conflict" | "not_found" | "wrong_schema" | "unauthorized"
 
 export interface AppError{
     type: AppErrorTypes;
@@ -10,9 +10,10 @@ export function isAppError(error: object): error is AppError {
 };
 
 export function errorTypeToStatusCode(type: AppErrorTypes){
+    if(type === "wrong_schema") return 422;
     if(type === "conflict") return 409;
     if(type === "not_found") return 404;
-    if(type === "wrong_schema") return 422;
+    if(type === "unauthorized") return 401;
     return 400;
 };
 
@@ -28,4 +29,9 @@ export function notFoundError(message?: string): AppError {
 
 export function wrongSchemaError(message?: string): AppError {
     return {type: "wrong_schema", message: message ?? ""}
+};
+
+
+export function unauthorizedError(message?: string): AppError {
+    return {type: "unauthorized", message: message ?? ""}
 };
