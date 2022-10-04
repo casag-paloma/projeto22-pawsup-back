@@ -18,7 +18,7 @@ export async function createUser(userData: IUserType) {
 export async function loginUser(userData: ILoginType) {
     
     const user = await userRepository.getUserByEmail(userData.email);
-    if(!user) throw notFoundError('this user is not cadastred yet, please sign in first')
+    if(!user) throw notFoundError('this user is not cadastred yet, please sign up first')
 
     const comparePassword = bcrypt.compareSync(userData.password, user.password);
     console.log(comparePassword);
