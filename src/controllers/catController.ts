@@ -19,3 +19,14 @@ export async function getCatById(req: Request, res: Response) {
 
     return res.status(200).send(cat);
 };
+
+export async function createCat(req: Request, res: Response) {
+    const {user} = res.locals;
+    const catData = req.body;
+
+    console.log(user, catData);
+    await catService.createCat(Number(user.userId), catData);
+
+    return res.sendStatus(201);
+}
+

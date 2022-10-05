@@ -1,5 +1,5 @@
 import {prisma} from "../database"
-import { ICatData } from "../types/catType";
+import { ICatData, ICatType } from "../types/catType";
 
 export async function getCats() {
     const cats = await prisma.cat.findMany();
@@ -12,13 +12,14 @@ export async function getCatsById(id: number) {
 };
 
 export async function getCatsByNameAndUserId(name: string, userId: number) {
-    const cat = await prisma.cat.findFirst({where:{name}});
+    const cat = await prisma.cat.findFirst({where:{name, userId}});
     return cat
 };
 
 
-export async function createCat(catData: ICatData) {
-    await prisma.cat.create({data: catData});
+export async function createCat(catData: ICatType) {
+    const result = await prisma.cat.create({data: catData});
+    console.log(result);
 };
 
 

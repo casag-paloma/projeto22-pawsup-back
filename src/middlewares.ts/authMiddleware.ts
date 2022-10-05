@@ -15,8 +15,12 @@ export async function authUser(
 
     const SECRET: string = process.env.TOKEN_SECRET_KEY ?? 'token_secret_key';
 
-    jwt.verify(token, SECRET, (err) => {
+    jwt.verify(token, SECRET, (err, tokenData) => {
         if(err) throw unauthorizedError();
+
+        res.locals.user = tokenData;
         next();
     });
+
+
 };
