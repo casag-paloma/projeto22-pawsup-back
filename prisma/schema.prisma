@@ -10,14 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//the animals shelters are the users
 model User {
   id    Int     @id @default(autoincrement())
-  name  String
   email String  @unique
+  name  String
+  phoneNumber String
   password String
 
+  cat   Cat[]
   @@map("users")
 }
+
+model Application {
+  id    Int     @id @default(autoincrement())
+  catId Int
+  cat Cat @relation(fields: [catId], references: [id])
+  applicantFullName  String
+  applicantEmail  String
+  applicantPhoneNumber String
+  applicantAge Int
+  addressId Int
+  address Address @relation(fields: [addressId], references: [id])
+  submissionDate DateTime
+
+  @@map("submissions")
+}
+
 
 model Cat {
   id    Int     @id @default(autoincrement())
@@ -29,6 +48,53 @@ model Cat {
   isVacinated Boolean?
   isCastraded Boolean?
   description String?
+  userId Int
+  user User @relation(fields: [userId], references: [id])
 
+  application Application[]
   @@map("cats")
 }
+
+model Address {
+  id    Int     @id @default(autoincrement())
+  street  String
+  number Int
+  complement   String?
+  zipCode      String
+  districtId Int
+  district District @relation(fields: [districtId], references: [id])
+
+  application  Application[]
+  @@map("adresses")
+}
+
+model District {
+  id    Int     @id @default(autoincrement())
+  name  String
+  cityId Int
+  city City @relation(fields: [cityId], references: [id])
+
+  address Address[]
+  @@map("districts")
+}
+
+model City {
+  id    Int     @id @default(autoincrement())
+  name  String
+  stateId Int
+  state State @relation(fields: [stateId], references: [id])
+
+  district District[]
+  
+  @@map("cities")
+}
+
+model State {
+  id    Int     @id @default(autoincrement())
+  name  String
+
+  city  City[]
+  
+  @@map("states")
+}
+
