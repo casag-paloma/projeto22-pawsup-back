@@ -30,3 +30,19 @@ export async function createCat(req: Request, res: Response) {
     return res.sendStatus(201);
 }
 
+export async function deleteCat(req: Request, res: Response) {
+    const {user} = res.locals;
+    const {id} = req.params;
+
+    const isIdNotANumber = isNaN(Number(id));
+    if(isIdNotANumber) throw unauthorizedError();
+
+    console.log(user, id);
+
+    await catService.deleteCat(user.userId, Number(id));
+
+    return res.sendStatus(204);
+};
+
+
+

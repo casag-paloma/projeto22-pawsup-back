@@ -18,10 +18,12 @@ export async function getCatsByNameAndUserId(name: string, userId: number) {
 
 
 export async function createCat(catData: ICatType) {
-    const result = await prisma.cat.create({data: catData});
-    console.log(result);
+    await prisma.cat.create({data: catData});
 };
 
+export async function deleteCat(catId: number) {
+    await prisma.cat.delete({where: {id: catId}});
+};
 
 
 
