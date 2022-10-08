@@ -22,19 +22,20 @@ model User {
   @@map("users")
 }
 
-model Application {
+model Form {
   id    Int     @id @default(autoincrement())
   catId Int
-  cat Cat @relation(fields: [catId], references: [id])
+  cat Cat? @relation(fields: [catId], references: [id])
   applicantFullName  String
   applicantEmail  String
   applicantPhoneNumber String
   applicantAge Int
-  addressId Int
-  address Address @relation(fields: [addressId], references: [id])
-  submissionDate DateTime
+  aplicantAddress String
+  //addressId Int
+  //address Address @relation(fields: [addressId], references: [id])
+  submissionDate String
 
-  @@map("submissions")
+  @@map("forms")
 }
 
 
@@ -51,7 +52,7 @@ model Cat {
   userId Int
   user User @relation(fields: [userId], references: [id])
 
-  application Application[]
+  form  Form[]
   @@map("cats")
 }
 
@@ -64,7 +65,7 @@ model Address {
   districtId Int
   district District @relation(fields: [districtId], references: [id])
 
-  application  Application[]
+  //form   Form[]
   @@map("adresses")
 }
 

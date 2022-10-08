@@ -25,5 +25,18 @@ export async function deleteCat(catId: number) {
     await prisma.cat.delete({where: {id: catId}});
 };
 
+export async function getFormsByUserId(userId:number) {
+    const forms = await prisma.cat.findMany({
+        where:{userId},
+        select:{
+            form: {
+                include:{
+                    cat:true
+                }
+            }
+        }
+    });
 
+    return forms;
+}
 
