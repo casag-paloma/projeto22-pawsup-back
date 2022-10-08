@@ -133,13 +133,40 @@ describe('Unit tests of catService', ()=>{
         .mockImplementationOnce(():any => {});
 
         const promise = catService.getCatById(id);
-        expect(promise).rejects.toEqual(notFoundError('this user is not cadastred yet, please sign up first'));
+        expect(promise).rejects.toEqual(notFoundError('this cat is not on the system'));
     });
 
+    it('deve criar um gato',async () => {
+        const cat = await catFactory();
+        const userId = 1;
 
-    it.todo('deve criar um gato ');
-    it.todo('não deve criar um gato duplicado para um mesmo usuário');
+        jest
+        .spyOn(catRepository, 'getCatsByNameAndUserId')
+        .mockImplementationOnce(():any =>{})
 
+        jest
+        .spyOn(catRepository, 'createCat')
+        .mockImplementationOnce(():any =>{})
+
+        await catService.createCat(userId, cat);
+
+        expect(catRepository.getCatsByNameAndUserId).toBeCalled();
+        expect(catRepository.createCat).toBeCalled();
+    });
+    it('não deve criar um gato duplicado para um mesmo usuário',async () => {
+        const cat = await catFactory();
+        const userId = 1;
+
+        jest
+        .spyOn(catRepository, 'getCatsByNameAndUserId')
+        .mockImplementationOnce(():any =>{
+            return cat
+        })
+
+        const promise = catService.createCat(userId, cat);
+
+        expect(promise).rejects.toEqual(conflictError('this cat is already cadastred'));
+    });
 
     it.todo('deve deletar um gato ');
     it.todo('não deve deletar um gato inexistente');

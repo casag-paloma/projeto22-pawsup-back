@@ -8,8 +8,9 @@ export default async function catFactory() {
         name: faker.animal.cat(),
         imageUrl: faker.image.animals() ,
         age:faker.finance.amount(0,30,0),
+        genre: faker.name.sex(),
         fivOrFelf: fivOrFelfOptions[random],
-        isVacinat: faker.datatype.boolean(),
+        isVacinated: faker.datatype.boolean(),
         isCastraded: faker.datatype.boolean(),
         description:faker.lorem.paragraph(1)
     };
