@@ -2,7 +2,7 @@ import userFactory from "../factories/userFactory";
 import userRepository from "../../src/repositories/userRepository";
 import authService from "../../src/service/authService";
 import { ILoginType, IUserType } from "../../src/types/userType";
-import { conflictError } from "../../src/utils/errorUtil";
+import { conflictError, notFoundError, unauthorizedError } from "../../src/utils/errorUtil";
 import loginFactory from "../factories/loginFactory";
 import bcrypt from "bcrypt";
 
@@ -60,13 +60,41 @@ describe('Unit tests of authService', ()=>{
             return true
         })
 
-        await authService.loginUser(user);
-
+        const token = await authService.loginUser(user);
+        console.log(token)
         expect(userRepository.getUserByEmail).toBeCalled();
         expect(bcrypt.compareSync).toBeCalled();
+        //expect().toBeInstanceOf(String);
     });
-    it.todo('não deve logar um usuario inexistente');
-    it.todo('não deve logar um usuario com senha errada');
+    it('não deve logar um usuario inexistente',async () => {
+        const user : ILoginType = await loginFactory();
+
+        jest
+        .spyOn(userRepository, 'getUserByEmail')
+        .mockImplementationOnce(():any => {});
+
+        const promise = authService.loginUser(user);
+        expect(promise).rejects.toEqual(notFoundError('this user is not cadastred yet, please sign up first'));
+        expect(bcrypt.compareSync).not.toBeCalled();
+    });
+    it('não deve logar um usuario com senha errada',async () => {
+        const user : ILoginType = await loginFactory();
+
+        jest
+        .spyOn(userRepository, 'getUserByEmail')
+        .mockImplementationOnce(():any => {
+            return user
+        });
+
+        jest
+        .spyOn(bcrypt, 'compareSync')
+        .mockImplementationOnce((): any=> {
+            return false
+        })
+
+        const promise = authService.loginUser(user);
+        expect(promise).rejects.toEqual(unauthorizedError('Incorrect user/password'));
+    });
 });
 
 describe('Unit tests of catService', ()=>{
