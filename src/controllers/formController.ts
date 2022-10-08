@@ -13,4 +13,12 @@ export async function createForm(req: Request, res: Response) {
 
     return res.sendStatus(201);
 
+};
+
+export async function getFormsByUserId(req: Request, res: Response) {
+    const {user} = res.locals;
+
+    const forms = await formService.getFormsByUserId(user.userId);
+
+    res.status(200).send(forms);
 }
