@@ -5,6 +5,9 @@ import { ILoginType, IUserType } from "../../src/types/userType";
 import { conflictError, notFoundError, unauthorizedError } from "../../src/utils/errorUtil";
 import loginFactory from "../factories/loginFactory";
 import bcrypt from "bcrypt";
+import catRepository from "../../src/repositories/catRepository";
+import catService from "../../src/service/catService";
+import catFactory from "../factories/catFactory";
 
 
 beforeEach(async () => {
@@ -30,7 +33,6 @@ describe('Unit tests of authService', ()=>{
         expect(userRepository.getUserByEmail).toBeCalled();
         expect(userRepository.create).toBeCalled();
     });
-
     it('não deve criar um usuario duplicado',async () => {
         const user : IUserType = await userFactory();
 
@@ -44,6 +46,7 @@ describe('Unit tests of authService', ()=>{
         expect(promise).rejects.toEqual(conflictError('this user is already cadastred'));
         expect(userRepository.create).not.toBeCalled();
     });
+
 
     it('deve logar o usuario ',async () => {
         const user : ILoginType = await loginFactory();
@@ -97,14 +100,46 @@ describe('Unit tests of authService', ()=>{
     });
 });
 
-describe('Unit tests of catService', ()=>{
-    it.todo('deve retornar uma lista dos gatos');
 
-    it.todo('deve retornar informações de um gato especifico');
-    it.todo('não deve retornar informações de um gato inexistente');
+describe('Unit tests of catService', ()=>{
+    it('deve retornar uma lista dos gatos',async () => {
+        jest
+        .spyOn(catRepository, 'getCats')
+        .mockImplementationOnce((): any=>{});
+
+        await catService.getCats();
+
+        expect(catRepository.getCats).toBeCalled();
+    });
+
+
+    it('deve retornar informações de um gato especifico',async () => {
+        const cat = await catFactory();
+        const id = 1;
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {
+            return cat
+        });
+
+        await catService.getCatById(id);
+
+        expect(catRepository.getCatsById).toBeCalled();
+    });
+    it('não deve retornar informações de um gato inexistente',async () => {
+        const id = 1;
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {});
+
+        const promise = catService.getCatById(id);
+        expect(promise).rejects.toEqual(notFoundError('this user is not cadastred yet, please sign up first'));
+    });
+
 
     it.todo('deve criar um gato ');
     it.todo('não deve criar um gato duplicado para um mesmo usuário');
+
 
     it.todo('deve deletar um gato ');
     it.todo('não deve deletar um gato inexistente');
@@ -116,6 +151,7 @@ describe('Unit tests of formService', ()=>{
     it.todo('não deve criar um formulário para um gato inexistente');
     it.todo('não deve criar um formulario duplicado para um mesmo gato e cliente');
     
+
     it.todo('deve retornar uma lista dos formulários cujos gatos foram criados pelos usuários em questão');
 });
 

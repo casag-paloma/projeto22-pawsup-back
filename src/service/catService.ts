@@ -1,4 +1,4 @@
-import * as catRepository from "../repositories/catRepository";
+import catRepository from "../repositories/catRepository";
 import { ICatData } from "../types/catType";
 import { conflictError, notFoundError, unauthorizedError } from "../utils/errorUtil";
 
@@ -32,8 +32,16 @@ export async function deleteCat(userId: number, catId: number) {
     
     const cat = await getCatById(catId);
 
-    if(cat.userId !== userId) throw unauthorizedError('this cat does not belong to this user')
+    const compareUsers = (cat.userId === userId)
+    if(!compareUsers) throw unauthorizedError('this cat does not belong to this user')
    
     await catRepository.deleteCat(catId);
 
 };
+
+export default{
+    getCats,
+    getCatById,
+    createCat,
+    deleteCat
+}
