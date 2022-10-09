@@ -3,7 +3,7 @@ import {faker} from "@faker-js/faker";
 import { prisma } from "../../src/database";
 import { ILoginType, IUserType } from "../../src/types/userType";
 
-async function generateNewUserFactory() {
+async function userBodyFactory() {
     return {
         name: faker.company.name(),
         email: faker.internet.email(),
@@ -22,7 +22,7 @@ async function userFactory(user: IUserType) {
     });
 };
 
-function generateNewLoginFactory(user:IUserType){
+function loginBodyFactory(user:IUserType){
     const loginUser: ILoginType = {
         email: user.email,
         password: user.password
@@ -32,7 +32,7 @@ function generateNewLoginFactory(user:IUserType){
 
 
 export default {
-    generateNewUserFactory,
+    userBodyFactory,
     userFactory,
-    generateNewLoginFactory
+    loginBodyFactory
 }

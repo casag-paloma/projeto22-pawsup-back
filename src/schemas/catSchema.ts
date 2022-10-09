@@ -6,7 +6,7 @@ const catSchema = joi.object({
     age: joi.string(),
     genre: joi.string(),
     fivOrFelf: joi.string().valid('FIV', 'FELV', 'none', 'both'),
-    isVacinat: joi.boolean(),
+    isVacinated: joi.boolean(),
     isCastraded: joi.boolean(),
     description: joi.string().max(500)
 });
