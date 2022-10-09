@@ -164,8 +164,29 @@ describe('Tests with the cats', () =>{
         
     });
     
-    it.todo('test GET /cats/:catId, with a valid cat ');
-    it.todo('test GET /cats/:catId, with an invalid cat (inexistent cat)');
+    it('test GET /cats/:catId, with a valid cat',async () => {
+        const cat = await catFactory.catBodyFactory();
+        const token = await tokenFactory.tokenFactory();
+        const userId = tokenFactory.userIdFromTokenFactory(token);
+
+        const {id} = await catFactory.catFactory(cat, userId);
+
+        const response = await server
+        .get(`/cats/${id}`)
+
+        console.log(response, response.body)
+        expect(response.status).toBe(200);
+        expect(response.body).not.toBeNull();
+    });
+    it('test GET /cats/:catId, with an invalid cat (inexistent cat)',async () => {
+        const id = faker.finance.amount(0,1000,0);
+       
+        const response = await server
+        .get(`/cats/${id}`)
+
+        expect(response.status).toBe(404);
+        
+    });
 });
 
 
