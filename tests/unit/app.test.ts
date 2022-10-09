@@ -21,7 +21,7 @@ beforeEach(async () => {
 
 describe('Unit tests of authService', ()=>{
     it('deve criar um usuario ', async ()=>{
-        const user : IUserType = await userFactory();
+        const user : IUserType = await userFactory.generateNewUserFactory();
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
@@ -37,7 +37,7 @@ describe('Unit tests of authService', ()=>{
         expect(userRepository.create).toBeCalled();
     });
     it('não deve criar um usuario duplicado',async () => {
-        const user : IUserType = await userFactory();
+        const user : IUserType = await userFactory.generateNewUserFactory();
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
