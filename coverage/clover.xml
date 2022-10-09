@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665320657762" clover="3.2.0">
-  <project timestamp="1665320657763" name="All files">
-    <metrics statements="130" coveredstatements="104" conditionals="37" coveredconditionals="23" methods="29" coveredmethods="15" elements="196" coveredelements="142" complexity="0" loc="130" ncloc="130" packages="5" files="12" classes="12"/>
+<coverage generated="1665320844677" clover="3.2.0">
+  <project timestamp="1665320844677" name="All files">
+    <metrics statements="130" coveredstatements="106" conditionals="37" coveredconditionals="23" methods="29" coveredmethods="16" elements="196" coveredelements="145" complexity="0" loc="130" ncloc="130" packages="5" files="12" classes="12"/>
     <package name="src">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="database.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/database.ts">
@@ -56,7 +56,7 @@
       </file>
     </package>
     <package name="src.service">
-      <metrics statements="65" coveredstatements="62" conditionals="17" coveredconditionals="14" methods="9" coveredmethods="8"/>
+      <metrics statements="65" coveredstatements="64" conditionals="17" coveredconditionals="14" methods="9" coveredmethods="9"/>
       <file name="authService.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/service/authService.ts">
         <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="9" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -112,7 +112,7 @@
         <line num="48" count="1" type="stmt"/>
       </file>
       <file name="formService.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/service/formService.ts">
-        <metrics statements="17" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -127,8 +127,8 @@
         <line num="19" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
       </file>
     </package>

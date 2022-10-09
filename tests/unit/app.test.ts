@@ -292,6 +292,16 @@ describe('Unit tests of formService', ()=>{
     });
     
 
-    it.todo('deve retornar uma lista dos formulários cujos gatos foram criados pelos usuários em questão');
+    it('deve retornar uma lista dos formulários cujos gatos foram criados pelos usuários em questão',async () => {
+        const userId = 1;
+
+        jest
+        .spyOn(catRepository, 'getFormsByUserId')
+        .mockImplementationOnce(():any =>{})
+
+        await formService.getFormsByUserId(userId);
+
+        expect(catRepository.getFormsByUserId).toBeCalled();
+    });
 });
 
