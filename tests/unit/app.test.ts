@@ -168,9 +168,63 @@ describe('Unit tests of catService', ()=>{
         expect(promise).rejects.toEqual(conflictError('this cat is already cadastred'));
     });
 
-    it.todo('deve deletar um gato ');
-    it.todo('não deve deletar um gato inexistente');
-    it.todo('não deve deletar um gato que não foi criado pelo usuário');
+
+    it('deve deletar um gato',async () => {
+        const userId = 1;
+        const catId = 2;
+        const cat = await catFactory();
+
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {
+            return cat
+        });
+
+        jest
+        .spyOn(catService, 'compareUsers')
+        .mockReturnValueOnce(true)
+  
+        jest
+        .spyOn(catRepository, 'deleteCat')
+        .mockImplementationOnce(():any => {});
+
+        await catService.deleteCat(userId, catId);
+
+        expect(catRepository.getCatsById).toBeCalled();
+        expect(catService.compareUsers).toBeCalled();
+        expect(catRepository.deleteCat).toBeCalled();
+
+    });
+    it('não deve deletar um gato inexistente',
+   async () => {
+    const userId = 1;
+    const catId = 2;
+
+    jest
+    .spyOn(catRepository, 'getCatsById')
+    .mockImplementationOnce(():any => {});
+
+    const promise = catService.deleteCat(userId, catId);
+    expect(promise).rejects.toEqual(notFoundError('this cat is not on the system'));
+   });
+    it('não deve deletar um gato que não foi criado pelo usuário',async () => {
+        const userId = 1;
+        const catId = 2;
+        const cat = await catFactory();
+
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {
+            return cat
+        });
+
+        jest
+        .spyOn(catService, 'compareUsers')
+        .mockReturnValueOnce(false)
+  
+        const promise = catService.deleteCat(userId, catId);
+        expect(promise).rejects.toEqual(unauthorizedError('this cat does not belong to this user'));
+    });
 });
 
 describe('Unit tests of formService', ()=>{
