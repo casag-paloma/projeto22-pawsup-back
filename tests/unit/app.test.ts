@@ -20,7 +20,7 @@ beforeEach(async () => {
 
 describe('Unit tests of authService', ()=>{
     it('deve criar um usuario ', async ()=>{
-        const user : IUserType = await userFactory.generateNewUserFactory();
+        const user : IUserType = await userFactory.userBodyFactory();
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
@@ -36,7 +36,7 @@ describe('Unit tests of authService', ()=>{
         expect(userRepository.create).toBeCalled();
     });
     it('não deve criar um usuario duplicado',async () => {
-        const user : IUserType = await userFactory.generateNewUserFactory();
+        const user : IUserType = await userFactory.userBodyFactory();
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
@@ -52,8 +52,8 @@ describe('Unit tests of authService', ()=>{
 
     it('deve logar o usuario ',async () => {
 
-        const user : IUserType = await userFactory.generateNewUserFactory();
-        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+        const user : IUserType = await userFactory.userBodyFactory();
+        const loginUser : ILoginType = userFactory.loginBodyFactory(user);
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
@@ -74,8 +74,8 @@ describe('Unit tests of authService', ()=>{
         //expect().toBeInstanceOf(String);
     });
     it('não deve logar um usuario inexistente',async () => {
-        const user : IUserType = await userFactory.generateNewUserFactory();
-        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+        const user : IUserType = await userFactory.userBodyFactory();
+        const loginUser : ILoginType = userFactory.loginBodyFactory(user);
 
 
         jest
@@ -87,8 +87,8 @@ describe('Unit tests of authService', ()=>{
         expect(bcrypt.compareSync).not.toBeCalled();
     });
     it('não deve logar um usuario com senha errada',async () => {
-        const user : IUserType = await userFactory.generateNewUserFactory();
-        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+        const user : IUserType = await userFactory.userBodyFactory();
+        const loginUser : ILoginType = userFactory.loginBodyFactory(user);
 
 
         jest
@@ -122,7 +122,7 @@ describe('Unit tests of catService', ()=>{
 
 
     it('deve retornar informações de um gato especifico',async () => {
-        const cat = await catFactory();
+        const cat = await catFactory.catBodyFactory();
         const id = 1;
         jest
         .spyOn(catRepository, 'getCatsById')
@@ -145,7 +145,7 @@ describe('Unit tests of catService', ()=>{
     });
 
     it('deve criar um gato',async () => {
-        const cat = await catFactory();
+        const cat = await catFactory.catBodyFactory();
         const userId = 1;
 
         jest
@@ -162,7 +162,7 @@ describe('Unit tests of catService', ()=>{
         expect(catRepository.createCat).toBeCalled();
     });
     it('não deve criar um gato duplicado para um mesmo usuário',async () => {
-        const cat = await catFactory();
+        const cat = await catFactory.catBodyFactory();
         const userId = 1;
 
         jest
@@ -180,7 +180,7 @@ describe('Unit tests of catService', ()=>{
     it('deve deletar um gato',async () => {
         const userId = 1;
         const catId = 2;
-        const cat = await catFactory();
+        const cat = await catFactory.catBodyFactory();
 
         jest
         .spyOn(catRepository, 'getCatsById')
@@ -218,7 +218,7 @@ describe('Unit tests of catService', ()=>{
     it('não deve deletar um gato que não foi criado pelo usuário',async () => {
         const userId = 1;
         const catId = 2;
-        const cat = await catFactory();
+        const cat = await catFactory.catBodyFactory();
 
         jest
         .spyOn(catRepository, 'getCatsById')
@@ -238,7 +238,7 @@ describe('Unit tests of catService', ()=>{
 describe('Unit tests of formService', ()=>{
     it('deve criar um formulário ',async () => {
         const catId = 1;
-        const form = await formFactory();
+        const form = await formFactory.formBodyFactory();
 
         jest
         .spyOn(catRepository, 'getCatsById')
@@ -263,7 +263,7 @@ describe('Unit tests of formService', ()=>{
     it('não deve criar um formulário para um gato inexistente',async () => {
         
         const catId = 1;
-        const form = await formFactory();
+        const form = await formFactory.formBodyFactory();
 
         jest
         .spyOn(catRepository, 'getCatsById')
@@ -276,7 +276,7 @@ describe('Unit tests of formService', ()=>{
     });
     it('não deve criar um formulario duplicado para um mesmo gato e cliente',async () => {
         const catId = 1;
-        const form = await formFactory();
+        const form = await formFactory.formBodyFactory();
 
 
         jest
