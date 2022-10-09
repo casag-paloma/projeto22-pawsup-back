@@ -3,7 +3,6 @@ import userRepository from "../../src/repositories/userRepository";
 import authService from "../../src/service/authService";
 import { ILoginType, IUserType } from "../../src/types/userType";
 import { conflictError, notFoundError, unauthorizedError } from "../../src/utils/errorUtil";
-import loginFactory from "../factories/loginFactory";
 import bcrypt from "bcrypt";
 import catRepository from "../../src/repositories/catRepository";
 import catService from "../../src/service/catService";
@@ -52,12 +51,14 @@ describe('Unit tests of authService', ()=>{
 
 
     it('deve logar o usuario ',async () => {
-        const user : ILoginType = await loginFactory();
+
+        const user : IUserType = await userFactory.generateNewUserFactory();
+        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
         .mockImplementationOnce(():any => {
-            return user
+            return loginUser
         });
 
         jest
@@ -73,23 +74,27 @@ describe('Unit tests of authService', ()=>{
         //expect().toBeInstanceOf(String);
     });
     it('não deve logar um usuario inexistente',async () => {
-        const user : ILoginType = await loginFactory();
+        const user : IUserType = await userFactory.generateNewUserFactory();
+        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
         .mockImplementationOnce(():any => {});
 
-        const promise = authService.loginUser(user);
+        const promise = authService.loginUser(loginUser);
         expect(promise).rejects.toEqual(notFoundError('this user is not cadastred yet, please sign up first'));
         expect(bcrypt.compareSync).not.toBeCalled();
     });
     it('não deve logar um usuario com senha errada',async () => {
-        const user : ILoginType = await loginFactory();
+        const user : IUserType = await userFactory.generateNewUserFactory();
+        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+
 
         jest
         .spyOn(userRepository, 'getUserByEmail')
         .mockImplementationOnce(():any => {
-            return user
+            return loginUser
         });
 
         jest

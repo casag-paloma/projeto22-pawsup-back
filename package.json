@@ -9,7 +9,7 @@
     "dev": "nodemon src/server.ts",
     "prisma-prod": "prisma migrate deploy",
     "prisma-test": "dotenv -e .env.test prisma migrate reset",
-    "test:integration": "npm run prisma-test && dotenv -e .env.test jest --no-cache",
+    "test:integration": "npm run prisma-test && dotenv -e .env.test jest -- -i --testPathPattern=tests/integration",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit"
   },
   "keywords": [],

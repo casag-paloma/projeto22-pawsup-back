@@ -4,6 +4,7 @@ import supertest from "supertest";
 import { prisma } from "../../src/database";
 import { deleteAllData, disconnectPrisma } from "../factories/scenarioFactory";
 import userFactory from "../factories/userFactory";
+import { ILoginType, IUserType } from "../../src/types/userType";
 
 beforeEach(async () => {
     await deleteAllData();
@@ -39,8 +40,33 @@ describe('Tests with the user', () =>{
         
     });
 
-    it.todo('test POST /signin , with a valid user');
-    it.todo('test POST /signup , with an invalid user (inexistent user)');
+    it('test POST /signin , with a valid user',async () => {
+        const user = await userFactory.generateNewUserFactory();
+        await userFactory.userFactory(user);
+ 
+        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+
+        const response = await server
+        .post('/signin')
+        .send(loginUser);
+
+        const token = response.text;
+        console.log(token);
+
+        expect(token).not.toBeNull();
+    });
+    it('test POST /signup , with an invalid user (inexistent user)',async () => {
+
+        const user : IUserType = await userFactory.generateNewUserFactory();
+        const loginUser : ILoginType = userFactory.generateNewLoginFactory(user);
+
+        const response = await server
+        .post('/signin')
+        .send(loginUser);
+
+        expect(response.status).toBe(404);
+        
+    });
 })
 afterAll(async () => {
     await disconnectPrisma();
