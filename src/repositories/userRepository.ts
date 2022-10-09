@@ -15,3 +15,7 @@ export async function getUserByEmail(userEmail: string) {
     return user;
 };
 
+export default {
+    create,
+    getUserByEmail
+}

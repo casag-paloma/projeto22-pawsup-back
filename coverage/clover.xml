@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1665320844677" clover="3.2.0">
+  <project timestamp="1665320844677" name="All files">
+    <metrics statements="130" coveredstatements="106" conditionals="37" coveredconditionals="23" methods="29" coveredmethods="16" elements="196" coveredelements="145" complexity="0" loc="130" ncloc="130" packages="5" files="12" classes="12"/>
+    <package name="src">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="database.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/database.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.repositories">
+      <metrics statements="32" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <file name="catRepository.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/repositories/catRepository.ts">
+        <metrics statements="18" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+      </file>
+      <file name="formRepository.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/repositories/formRepository.ts">
+        <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+      <file name="userRepository.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/repositories/userRepository.ts">
+        <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.service">
+      <metrics statements="65" coveredstatements="64" conditionals="17" coveredconditionals="14" methods="9" coveredmethods="9"/>
+      <file name="authService.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/service/authService.ts">
+        <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="9" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="34" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+      </file>
+      <file name="catService.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/service/catService.ts">
+        <metrics statements="24" coveredstatements="23" conditionals="5" coveredconditionals="4" methods="5" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+      </file>
+      <file name="formService.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/service/formService.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="16" coveredstatements="9" conditionals="20" coveredconditionals="9" methods="6" coveredmethods="3"/>
+      <file name="errorUtil.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/src/utils/errorUtil.ts">
+        <metrics statements="16" coveredstatements="9" conditionals="20" coveredconditionals="9" methods="6" coveredmethods="3"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="6" type="cond" truecount="3" falsecount="1"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="8" type="cond" truecount="3" falsecount="1"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="5" type="cond" truecount="3" falsecount="1"/>
+      </file>
+    </package>
+    <package name="tests.factories">
+      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <file name="catFactory.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/tests/factories/catFactory.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+      </file>
+      <file name="formFactory.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/tests/factories/formFactory.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+      </file>
+      <file name="loginFactory.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/tests/factories/loginFactory.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+      </file>
+      <file name="userFactory.ts" path="/home/paloma/Área de Trabalho/Módulo 5 - Arquitetura/projeto22-pawsup/projeto22-pawsup-back/tests/factories/userFactory.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

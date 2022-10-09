@@ -1,4 +1,4 @@
-import * as userRepository from "../repositories/userRepository";
+import userRepository from "../repositories/userRepository";
 import { ILoginType, IUserType } from "../types/userType";
 import { conflictError, notFoundError, unauthorizedError } from "../utils/errorUtil";
 import bcrypt from "bcrypt";
@@ -41,3 +41,7 @@ export async function loginUser(userData: ILoginType) {
     return token;
 }
 
+export default{
+    createUser,
+    loginUser
+}

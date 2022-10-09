@@ -4,6 +4,7 @@ const catSchema = joi.object({
     name: joi.string().required(),
     imageUrl: joi.string().uri().required(),
     age: joi.string(),
+    genre: joi.string(),
     fivOrFelf: joi.string().valid('FIV', 'FELV', 'none', 'both'),
     isVacinat: joi.boolean(),
     isCastraded: joi.boolean(),
