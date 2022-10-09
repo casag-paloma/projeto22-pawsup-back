@@ -1,6 +1,8 @@
 import {faker} from "@faker-js/faker";
+import { prisma } from "../../src/database";
+import { ICatData, ICatType } from "../../src/types/catType";
 
-export default async function catFactory() {
+async function catBodyFactory() {
     const fivOrFelfOptions = ['FIV', 'FELV', 'both', 'none'];
     const random = Math.floor(Math.random() * 4);
 
@@ -15,3 +17,20 @@ export default async function catFactory() {
         description:faker.lorem.paragraph(1)
     };
 };
+
+
+async function catFactory(cat: ICatData, userId: number ) {
+    const newCat =  prisma.cat.create({
+        data:{
+            ...cat,
+            userId
+        }
+    });
+    return newCat;
+};
+
+
+export default{
+    catBodyFactory,
+    catFactory
+}

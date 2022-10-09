@@ -1,6 +1,6 @@
 import joi from "joi";
 
-const phoneNumberRegex = "^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$";
+const phoneNumberRegex = "^\([1-9]{2}\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$";
 
 const formSchema = joi.object({
     applicantFullName: joi.string().required(),
