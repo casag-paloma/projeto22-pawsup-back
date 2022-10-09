@@ -20,12 +20,13 @@ async function catBodyFactory() {
 
 
 async function catFactory(cat: ICatData, userId: number ) {
-    return prisma.cat.create({
+    const newCat =  prisma.cat.create({
         data:{
             ...cat,
             userId
         }
     });
+    return newCat;
 };
 
 

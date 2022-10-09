@@ -1,5 +1,6 @@
 import app from "../../src/app";
 import supertest from "supertest";
+import  {faker} from "@faker-js/faker";
 
 import { prisma } from "../../src/database";
 import { deleteAllData, disconnectPrisma } from "../factories/scenarioFactory";
@@ -103,9 +104,48 @@ describe('Tests with the cats', () =>{
 
     });
 
-    it.todo('test DELETE /cats/:catId, with a valid cat');
-    it.todo('test DELETE /cats/:catId , with an invalid cat (inexistent cat)');
-    it.todo('test DELETE /cats/:catId , with an invalid cat (cat doesn belong to the user)');
+    it('test DELETE /cats/:catId, with a valid cat',async () => {
+        const cat = await catFactory.catBodyFactory();
+        const token = await tokenFactory.tokenFactory();
+        const userId = tokenFactory.userIdFromTokenFactory(token);
+
+        const {id} = await catFactory.catFactory(cat, userId);
+
+        const result = await server
+        .delete(`/cats/${id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+        expect(result.status).toBe(204);
+
+    });
+    it('test DELETE /cats/:catId , with an invalid cat (inexistent cat)',async () => {
+        const token = await tokenFactory.tokenFactory();
+        const id = faker.finance.amount(0,1000,0);
+
+        const result = await server
+        .delete(`/cats/${id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+        expect(result.status).toBe(404);
+
+    });
+    it('test DELETE /cats/:catId , with an invalid cat (cat doesn belong to the user)',async () => {
+        const cat = await catFactory.catBodyFactory();
+        const token = await tokenFactory.tokenFactory();
+        const userId = tokenFactory.userIdFromTokenFactory(token);
+
+        const {id} = await catFactory.catFactory(cat, userId);
+
+        const tokenFromAnotherUser = await tokenFactory.tokenFactory();
+
+        const result = await server
+        .delete(`/cats/${id}`)
+        .set('Authorization', `Bearer ${tokenFromAnotherUser}`);
+
+        expect(result.status).toBe(401);
+
+        
+    });
 
     it.todo('test GET /cats');
     
