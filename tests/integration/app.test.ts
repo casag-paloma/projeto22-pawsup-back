@@ -147,7 +147,22 @@ describe('Tests with the cats', () =>{
         
     });
 
-    it.todo('test GET /cats');
+    it('test GET /cats',async () => {
+        const cat = await catFactory.catBodyFactory();
+        const token = await tokenFactory.tokenFactory();
+        const userId = tokenFactory.userIdFromTokenFactory(token);
+
+        await catFactory.catFactory(cat, userId);
+
+        const response = await server
+        .get('/cats')
+
+        console.log(response, response.body)
+        expect(response.status).toBe(200);
+        expect(response.body.length).toBe(1);
+
+        
+    });
     
     it.todo('test GET /cats/:catId, with a valid cat ');
     it.todo('test GET /cats/:catId, with an invalid cat (inexistent cat)');
