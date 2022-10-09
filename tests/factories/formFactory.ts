@@ -1,6 +1,9 @@
 import {faker} from "@faker-js/faker";
+import dayjs from "dayjs";
+import { prisma } from "../../src/database";
+import { IFormData } from "../../src/types/formType";
 
-export default async function formFactory() {
+async function formBodyFactory() {
 
     return {
         applicantFullName: faker.name.fullName(),
@@ -11,3 +14,18 @@ export default async function formFactory() {
     };
 };
 
+async function formFactory(formData: IFormData, catId:number) {
+    const today = dayjs().format();
+    return prisma.form.create({
+        data:{
+            ...formData,
+            catId,
+            submissionDate: today
+        }
+    });
+};
+
+export default{
+    formBodyFactory,
+    formFactory
+}

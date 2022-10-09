@@ -8,6 +8,8 @@ import userFactory from "../factories/userFactory";
 import { ILoginType, IUserType } from "../../src/types/userType";
 import catFactory from "../factories/catFactory";
 import tokenFactory from "../factories/tokenFactory";
+import formFactory from "../factories/formFactory";
+import { IFormData } from "../../src/types/formType";
 
 beforeEach(async () => {
     await deleteAllData();
@@ -191,9 +193,51 @@ describe('Tests with the cats', () =>{
 
 
 describe('Tests with the forms', () =>{
-it.todo('test POST /form/:catId , with a valid form');
-it.todo('test POST /form/:catId , with an invalid catId',);
-it.todo('test POST /forms/:catId , with an invalid form (repeated catId and applicant email)');
+it('test POST /form/:catId , with a valid form',async () => {
+    const cat = await catFactory.catBodyFactory();
+    const token = await tokenFactory.tokenFactory();
+    const userId = tokenFactory.userIdFromTokenFactory(token);
+    const createdCat = await catFactory.catFactory(cat, userId);
+    const catId = createdCat.id;
+
+    const form: IFormData = await formFactory.formBodyFactory();
+
+    const result = await server
+    .post(`/forms/${catId}`)
+    .send(form);
+
+    expect(result.status).toBe(201);
+
+});
+it('test POST /form/:catId , with an invalid catId (inexistent cat)',async () => {
+    const catId = faker.finance.amount(0,1000,0);
+    const form : IFormData = await formFactory.formBodyFactory();
+
+    const result = await server
+    .post(`/forms/${catId}`)
+    .send(form);
+
+    expect(result.status).toBe(404);
+
+});
+it('test POST /forms/:catId , with an invalid form (repeated catId and applicant email)',async () => {
+    const cat = await catFactory.catBodyFactory();
+    const token = await tokenFactory.tokenFactory();
+    const userId = tokenFactory.userIdFromTokenFactory(token);
+    const createdCat = await catFactory.catFactory(cat, userId);
+    const catId = createdCat.id;
+
+    const form: IFormData = await formFactory.formBodyFactory();
+    await formFactory.formFactory(form, catId)
+
+    const result = await server
+    .post(`/forms/${catId}`)
+    .send(form);
+
+    expect(result.status).toBe(409);
+
+    
+});
 
 it.todo('test GET /forms ')
 });
