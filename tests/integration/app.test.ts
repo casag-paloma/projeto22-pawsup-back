@@ -239,7 +239,24 @@ it('test POST /forms/:catId , with an invalid form (repeated catId and applicant
     
 });
 
-it.todo('test GET /forms ')
+it('test GET /forms',async () => {
+    const cat = await catFactory.catBodyFactory();
+    const token = await tokenFactory.tokenFactory();
+    const userId = tokenFactory.userIdFromTokenFactory(token);
+    const createdCat = await catFactory.catFactory(cat, userId);
+    const catId = createdCat.id;
+
+    const form: IFormData = await formFactory.formBodyFactory();
+    await formFactory.formFactory(form, catId)
+
+    const response = await server
+    .get('/forms')
+    .set('Authorization', `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+
+})
 });
 
 afterAll(async () => {
