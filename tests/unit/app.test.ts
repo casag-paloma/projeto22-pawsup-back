@@ -8,6 +8,9 @@ import bcrypt from "bcrypt";
 import catRepository from "../../src/repositories/catRepository";
 import catService from "../../src/service/catService";
 import catFactory from "../factories/catFactory";
+import formFactory from "../factories/formFactory";
+import formRepository from "../../src/repositories/formRepository";
+import formService from "../../src/service/formService";
 
 
 beforeEach(async () => {
@@ -228,9 +231,65 @@ describe('Unit tests of catService', ()=>{
 });
 
 describe('Unit tests of formService', ()=>{
-    it.todo('deve criar um formulário ');
-    it.todo('não deve criar um formulário para um gato inexistente');
-    it.todo('não deve criar um formulario duplicado para um mesmo gato e cliente');
+    it('deve criar um formulário ',async () => {
+        const catId = 1;
+        const form = await formFactory();
+
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {
+            return form
+        });
+        
+        jest
+        .spyOn(formRepository, 'getFormByApplicantEmailAndCatId')
+        .mockImplementationOnce(():any => {});
+
+        jest
+        .spyOn(formRepository, 'createForm')
+        .mockImplementationOnce(():any => {});
+
+        await formService.createForm(catId, form);
+
+        expect(catRepository.getCatsById).toBeCalled();
+        expect(formRepository.getFormByApplicantEmailAndCatId).toBeCalled();
+        expect(formRepository.createForm).toBeCalled();
+    });
+    it('não deve criar um formulário para um gato inexistente',async () => {
+        
+        const catId = 1;
+        const form = await formFactory();
+
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {});
+        
+        const promise = formService.createForm(catId, form);
+        expect(promise).rejects.toEqual(notFoundError('this cat is not on the system'));
+
+
+    });
+    it('não deve criar um formulario duplicado para um mesmo gato e cliente',async () => {
+        const catId = 1;
+        const form = await formFactory();
+
+
+        jest
+        .spyOn(catRepository, 'getCatsById')
+        .mockImplementationOnce(():any => {
+            return form
+        });
+        
+        jest
+        .spyOn(formRepository, 'getFormByApplicantEmailAndCatId')
+        .mockImplementationOnce(():any => {
+            return form
+        });
+        
+        const promise = formService.createForm(catId, form);
+        expect(promise).rejects.toEqual(conflictError('You already made a form for this cat'));
+
+    });
     
 
     it.todo('deve retornar uma lista dos formulários cujos gatos foram criados pelos usuários em questão');

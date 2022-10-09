@@ -1,5 +1,5 @@
-import * as formRepository from "../repositories/formRepository";
-import * as catRepository from "../repositories/catRepository"
+import formRepository from "../repositories/formRepository";
+import  catRepository from "../repositories/catRepository"
 import { IFormData, IFormType } from "../types/formType";
 import dayjs from "dayjs";
 import { conflictError } from "../utils/errorUtil";
@@ -28,4 +28,9 @@ export async function createForm(catId: number, formData: IFormData ) {
 export async function getFormsByUserId(userId: number) {
     const forms = await catRepository.getFormsByUserId(userId);
     return forms;
+}
+
+export default{
+    createForm,
+    getFormsByUserId
 }

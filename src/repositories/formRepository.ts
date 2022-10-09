@@ -9,3 +9,8 @@ export async function getFormByApplicantEmailAndCatId(applicantEmail: string, ca
     const form  = await prisma.form.findFirst({where:{catId, applicantEmail}})  
     return form;
 };
+
+export default{
+    createForm,
+    getFormByApplicantEmailAndCatId
+}
