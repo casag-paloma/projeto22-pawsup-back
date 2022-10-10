@@ -11,10 +11,16 @@ export async function getCatsById(id: number) {
     return cat
 };
 
+export async function getCatsByUserId(userId: number) {
+    const cats = await prisma.cat.findMany({where:{userId}});
+    return cats
+};
+
 export async function getCatsByNameAndUserId(name: string, userId: number) {
     const cat = await prisma.cat.findFirst({where:{name, userId}});
     return cat
 };
+
 
 export async function createCat(catData: ICatType) {
     await prisma.cat.create({data: catData});
@@ -42,6 +48,7 @@ export async function getFormsByUserId(userId:number) {
 export default{
     getCats,
     getCatsById,
+    getCatsByUserId,
     getCatsByNameAndUserId,
     createCat,
     deleteCat,

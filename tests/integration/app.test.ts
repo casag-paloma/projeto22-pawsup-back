@@ -189,6 +189,21 @@ describe('Tests with the cats', () =>{
         expect(response.status).toBe(404);
         
     });
+
+    it('test GET /:userId/cats, with a valid user',async () => {
+        const cat = await catFactory.catBodyFactory();
+        const token = await tokenFactory.tokenFactory();
+        const userId = tokenFactory.userIdFromTokenFactory(token);
+        await catFactory.catFactory(cat, userId);
+
+        const response = await server
+        .get(`/${userId}/cats`)
+        .set('Authorization', `Bearer ${token}`);
+
+        console.log(response, response.body)
+        expect(response.status).toBe(200);
+        expect(response.body).not.toBeNull();
+    });
 });
 
 

@@ -1,4 +1,5 @@
 import catRepository from "../repositories/catRepository";
+import userRepository from "../repositories/userRepository";
 import { ICatData } from "../types/catType";
 import { conflictError, notFoundError, unauthorizedError } from "../utils/errorUtil";
 
@@ -11,6 +12,11 @@ export async function getCatById(id: number) {
     const cat = await catRepository.getCatsById(id);
     if(!cat) throw notFoundError('this cat is not on the system')
     return cat;
+};
+
+export async function getCatsByUserId(userId: number) {
+    const cats = await catRepository.getCatsByUserId(userId);
+    return cats;
 };
 
 export async function createCat(userId: number, catData: ICatData) {
@@ -48,6 +54,7 @@ export async function deleteCat(userId: number, catId: number) {
 export default{
     getCats,
     getCatById,
+    getCatsByUserId,
     createCat,
     deleteCat,
     compareUsers

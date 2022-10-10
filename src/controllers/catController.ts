@@ -20,6 +20,17 @@ export async function getCatById(req: Request, res: Response) {
     return res.status(200).send(cat);
 };
 
+export async function getCatsByUserId(req: Request, res: Response) {
+    const {userId} = req.params;
+
+    const isIdNotANumber = isNaN(Number(userId));
+    if(isIdNotANumber) throw unauthorizedError();
+
+    const cats = await catService.getCatsByUserId(Number(userId));
+
+    return res.status(200).send(cats);
+};
+
 export async function createCat(req: Request, res: Response) {
     const {user} = res.locals;
     const catData = req.body;

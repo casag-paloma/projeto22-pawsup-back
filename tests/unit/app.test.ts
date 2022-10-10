@@ -144,6 +144,18 @@ describe('Unit tests of catService', ()=>{
         expect(promise).rejects.toEqual(notFoundError('this cat is not on the system'));
     });
 
+    it('deve retornar informações dos gatos de um usuário especifico',async () => {
+        const id = 1;
+
+        jest
+        .spyOn(catRepository, 'getCatsByUserId')
+        .mockImplementationOnce(():any => {});
+
+        await catService.getCatsByUserId(id);
+
+        expect(catRepository.getCatsByUserId).toBeCalled();
+    });
+    
     it('deve criar um gato',async () => {
         const cat = await catFactory.catBodyFactory();
         const userId = 1;
