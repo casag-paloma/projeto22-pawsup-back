@@ -8,7 +8,7 @@ const catRouter = Router();
 
 catRouter.get('/cats', getCats);
 catRouter.get('/cats/:id', getCatById);
-catRouter.get('/:userId/cats', authUser, getCatsByUserId);
+catRouter.get('/user/cats', authUser, getCatsByUserId);
 
 catRouter.post('/cats', authUser, joiValidation(catSchema), createCat);
 catRouter.delete('/cats/:id', authUser, deleteCat);

@@ -190,14 +190,14 @@ describe('Tests with the cats', () =>{
         
     });
 
-    it('test GET /:userId/cats, with a valid user',async () => {
+    it('test GET /user/cats, with a valid user',async () => {
         const cat = await catFactory.catBodyFactory();
         const token = await tokenFactory.tokenFactory();
         const userId = tokenFactory.userIdFromTokenFactory(token);
         await catFactory.catFactory(cat, userId);
 
         const response = await server
-        .get(`/${userId}/cats`)
+        .get(`/user/cats`)
         .set('Authorization', `Bearer ${token}`);
 
         console.log(response, response.body)

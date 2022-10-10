@@ -21,12 +21,9 @@ export async function getCatById(req: Request, res: Response) {
 };
 
 export async function getCatsByUserId(req: Request, res: Response) {
-    const {userId} = req.params;
-
-    const isIdNotANumber = isNaN(Number(userId));
-    if(isIdNotANumber) throw unauthorizedError();
-
-    const cats = await catService.getCatsByUserId(Number(userId));
+    const {user} = res.locals;
+    console.log(user);
+    const cats = await catService.getCatsByUserId(Number(user.userId));
 
     return res.status(200).send(cats);
 };
